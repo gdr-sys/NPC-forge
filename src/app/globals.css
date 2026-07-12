@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   DARK THEME (default)
+   ══════════════════════════════════════════════════════════════════════════════ */
+:root, [data-theme="dark"] {
+  --bg-base: #0f0f1a;
+  --bg-elevated: #1a1a2e;
+  --bg-card: #222240;
+  --bg-input: #16162a;
+  --bg-hover: #2a2a4a;
+  
+  --text-primary: #e8e6f0;
+  --text-secondary: #9e9cc0;
+  --text-muted: #6b6990;
+  --text-dim: #4a4870;
+  
+  --border-subtle: rgba(255,255,255,0.08);
+  --border-medium: rgba(255,255,255,0.15);
+  
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.5);
+  --shadow-button: 0 6px 24px rgba(0,0,0,0.4);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   LIGHT THEME
+   ══════════════════════════════════════════════════════════════════════════════ */
+[data-theme="light"] {
+  --bg-base: #f5f5f8;
+  --bg-elevated: #ffffff;
+  --bg-card: #ffffff;
+  --bg-input: #eeeef2;
+  --bg-hover: #e8e8ee;
+  
+  --text-primary: #1a1a2e;
+  --text-secondary: #5a5880;
+  --text-muted: #8888a0;
+  --text-dim: #aaaabc;
+  
+  --border-subtle: rgba(0,0,0,0.06);
+  --border-medium: rgba(0,0,0,0.12);
+  
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-button: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   BASE STYLES
+   ══════════════════════════════════════════════════════════════════════════════ */
+html {
+  background: var(--bg-base);
+  transition: background-color 0.3s ease;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   SCROLLBAR
+   ══════════════════════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 99px; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ══════════════════════════════════════════════════════════════════════════════ */
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes traitPop {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes spinOnce {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes bounceOnce {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.anim-card-reveal  { animation: cardReveal .45s ease-out both; }
+.anim-trait-pop    { animation: traitPop .3s ease-out both; }
+.anim-fade-in      { animation: fadeIn .3s ease-out both; }
+.anim-fade-in-up   { animation: fadeInUp .35s ease-out both; }
+.anim-slide-up     { animation: slideUp .35s cubic-bezier(.22,1,.36,1) both; }
+.anim-spin-once    { animation: spinOnce .35s ease-out; }
+.anim-bounce-once  { animation: bounceOnce .3s ease-out; }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   PRINT STYLES
+   ══════════════════════════════════════════════════════════════════════════════ */
+@media print {
+  body { background: white !important; }
+  .no-print { display: none !important; }
+}
