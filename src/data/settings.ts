@@ -72,7 +72,7 @@ function pickN<T>(arr: T[], n: number): T[] {
   return shuffled.slice(0, n);
 }
 
-export function generateNPC(settingKey: SettingKey): GeneratedNPC {
+export function generateNPC(settingKey: SettingKey, lang: "it" | "en" = "it"): GeneratedNPC {
   const data = SETTINGS[settingKey];
   const isMale = Math.random() > 0.5;
   const firstName = pick(isMale ? data.maleNames : data.femaleNames);
@@ -80,17 +80,17 @@ export function generateNPC(settingKey: SettingKey): GeneratedNPC {
   return {
     name: `${firstName} ${surname}`,
     setting: settingKey,
-    role: pick(data.roles),
-    appearance: pickN(data.appearance, 3),
-    personality: pickN(data.personality, Math.random() > 0.5 ? 3 : 2),
-    secret: pick(data.secrets),
-    motivation: pick(data.motivations),
-    hook: pick(data.hooks),
-    quote: pick(data.quotes),
+    role: pick(data.roles[lang]),
+    appearance: pickN(data.appearance[lang], 3),
+    personality: pickN(data.personality[lang], Math.random() > 0.5 ? 3 : 2),
+    secret: pick(data.secrets[lang]),
+    motivation: pick(data.motivations[lang]),
+    hook: pick(data.hooks[lang]),
+    quote: pick(data.quotes[lang]),
   };
 }
 
-export function regenerateField(settingKey: SettingKey, field: keyof GeneratedNPC): string | string[] {
+export function regenerateField(settingKey: SettingKey, field: keyof GeneratedNPC, lang: "it" | "en" = "it"): string | string[] {
   const data = SETTINGS[settingKey];
   switch (field) {
     case "name": {
@@ -100,19 +100,19 @@ export function regenerateField(settingKey: SettingKey, field: keyof GeneratedNP
       return `${firstName} ${surname}`;
     }
     case "role":
-      return pick(data.roles);
+      return pick(data.roles[lang]);
     case "appearance":
-      return pickN(data.appearance, 3);
+      return pickN(data.appearance[lang], 3);
     case "personality":
-      return pickN(data.personality, Math.random() > 0.5 ? 3 : 2);
+      return pickN(data.personality[lang], Math.random() > 0.5 ? 3 : 2);
     case "secret":
-      return pick(data.secrets);
+      return pick(data.secrets[lang]);
     case "motivation":
-      return pick(data.motivations);
+      return pick(data.motivations[lang]);
     case "hook":
-      return pick(data.hooks);
+      return pick(data.hooks[lang]);
     case "quote":
-      return pick(data.quotes);
+      return pick(data.quotes[lang]);
     default:
       return "";
   }
