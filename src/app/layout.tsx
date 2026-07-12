@@ -3,10 +3,12 @@ import type { ReactNode } from "react";
 import { AppProvider } from "@/lib/AppContext";
 import "./globals.css";
 
+const basePath = "/NPC-Forge";
+
 export const metadata: Metadata = {
   title: "NPC Forge — Universal NPC Generator",
   description: "Generate instant NPCs for any tabletop RPG. Fantasy, Sci-Fi, Horror, and more.",
-  manifest: "/manifest.json",
+  manifest: `${basePath}/manifest.json`,
 };
 
 export const viewport: Viewport = {
